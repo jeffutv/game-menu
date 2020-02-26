@@ -48,7 +48,7 @@ void setup() {
   //String os = System.getProperty("os.name");
   //if (os.indexOf("Mac") >= 0) suffix = ".app";
   if (platform == WINDOWS) {
-    suffix = ".app";
+    suffix = ".exe";
     connector = "\\";
   }
 
@@ -105,14 +105,14 @@ void setup() {
       //println(files[f]);
 
       // IF GAME APP
-      if (files[f].endsWith(suffix)) {
+      if (files[f].endsWith(suffix) && !files[f].contains("UnityCrashHandler")) {
         gameFiles[i] = files[f];
       }
 
       // IF TEXT FILE
       if (files[f].endsWith(".txt")) {
         //println ("loading Title & Description");
-        String stringPath = path + "/" + folderName + "/" + files[f];
+        String stringPath = path + connector + folderName + connector + files[f];
         //println(files[f] + " string path is " + stringPath);
         File stringFile = new File(stringPath);
         String[] loadedInfo = loadStrings(stringFile);
@@ -130,7 +130,7 @@ void setup() {
         files[f].endsWith(".PNG") || 
         files[f].endsWith(".jpg") || 
         files[f].endsWith(".JPG")) {
-        PImage img = loadImage(path + "/" + folderName + "/" + files[f]);
+        PImage img = loadImage(path + connector + folderName + connector + files[f]);
         gameImages[i] = img;
       }
     }
@@ -345,7 +345,7 @@ void keyPressed() {
     if (!launching) {
       launching = true;
       cooldown = millis() + 1000;
-      String fileToLaunch = path + "/" + gameFolders[selectedGame] + "/" + gameFiles[selectedGame];
+      String fileToLaunch = path + connector + gameFolders[selectedGame] + connector + gameFiles[selectedGame];
       //File launchFile = new File (path + "/" + gameFolders[selectedGame] + "/" + gameFiles[selectedGame] + suffix);
       println("Attempting to launch " + fileToLaunch);
       launch(fileToLaunch);
