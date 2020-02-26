@@ -49,7 +49,7 @@ void setup() {
   //if (os.indexOf("Mac") >= 0) suffix = ".app";
   if (platform == WINDOWS) {
     suffix = ".app";
-    connector = "\";
+    connector = "\\";
   }
 
   // FONTS SETUP
