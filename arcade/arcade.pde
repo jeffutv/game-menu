@@ -24,6 +24,7 @@ String title = "Game Design at Fitchburg State";
 String error = "No Games Installed";
 String description = "";
 String suffix = ".app";
+String connector = "/";
 String dbFile;
 boolean launching = false;
 
@@ -42,6 +43,14 @@ void setup() {
   //fullScreen();
   size(1920, 1080);
   noCursor();
+  
+  // Set Platform
+  //String os = System.getProperty("os.name");
+  //if (os.indexOf("Mac") >= 0) suffix = ".app";
+  if (platform == WINDOWS) {
+    suffix = ".app";
+    connector = "\";
+  }
 
   // FONTS SETUP
   font = createFont("fonts/pixelmix.ttf", 20);
@@ -85,7 +94,7 @@ void setup() {
     //gameDescriptions[i] = defaultDescription;
     //gameImages[i] = defaultImage;
     
-    File folder = new File (path + "/" + folderName);
+    File folder = new File (path + connector + folderName);
     String[] files = folder.list();
 
     println(i + ". " + folderName);
